@@ -8,85 +8,673 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
-</head>
-<body class="bg-light text-dark">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    }
 
-  <div class="container py-5">
-    <div class="text-center mb-4">
-      <h1 class="display-5 fw-bold">Harrison Capia Tintaya</h1>
-      <p class="lead">🎓 Estudiante de Estadística e Informática - Puno, Perú</p>
-      <p>💡 Apasionado por el análisis de datos, visualización estadística y automatización con código</p>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .main-container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      margin: 2rem auto;
+      max-width: 1200px;
+    }
+
+    .hero-section {
+      background: var(--primary-gradient);
+      color: white;
+      padding: 4rem 2rem;
+      border-radius: 20px 20px 0 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      font-size: 3rem;
+      backdrop-filter: blur(10px);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .section-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .section-title {
+      color: #2c3e50;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title i {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .skill-item {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border: none;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+    }
+
+    .skill-item:hover {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      border-left-color: #2196f3;
+      transform: translateX(5px);
+    }
+
+    .system-card {
+      border: none;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .system-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .system-card-header {
+      padding: 1.5rem;
+      background: var(--primary-gradient);
+      color: white;
+      position: relative;
+    }
+
+    .system-card-header.php-theme {
+      background: var(--secondary-gradient);
+    }
+
+    .system-card-header.java-theme {
+      background: var(--success-gradient);
+    }
+
+    .system-card-body {
+      padding: 2rem;
+      background: white;
+    }
+
+    .tech-badge {
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.1);
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin: 0.2rem;
+      font-weight: 500;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .feature-list li {
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .feature-list li::before {
+      content: '✓';
+      background: #4caf50;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .btn-modern {
+      border: none;
+      border-radius: 25px;
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-modern::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-modern:hover::before {
+      left: 100%;
+    }
+
+    .projects-table {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .projects-table thead {
+      background: var(--dark-gradient);
+    }
+
+    .projects-table tbody tr {
+      transition: all 0.3s ease;
+    }
+
+    .projects-table tbody tr:hover {
+      background: rgba(102, 126, 234, 0.1);
+      transform: scale(1.01);
+    }
+
+    .contact-item {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      transition: all 0.3s ease;
+      border-left: 5px solid transparent;
+    }
+
+    .contact-item:hover {
+      background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+      border-left-color: #4caf50;
+      transform: translateX(10px);
+    }
+
+    .footer-quote {
+      background: var(--primary-gradient);
+      color: white;
+      padding: 2rem;
+      border-radius: 0 0 20px 20px;
+      text-align: center;
+      font-style: italic;
+      font-size: 1.1rem;
+    }
+
+    .floating-icons {
+      position: fixed;
+      top: 50%;
+      right: 2rem;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 1000;
+    }
+
+    .floating-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--primary-gradient);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .floating-icon:hover {
+      transform: scale(1.1);
+      color: white;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-on-scroll {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @media (max-width: 768px) {
+      .floating-icons {
+        display: none;
+      }
+      
+      .hero-section {
+        padding: 2rem 1rem;
+      }
+      
+      .section-card {
+        margin: 1rem 0;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Social Icons -->
+  <div class="floating-icons">
+    <a href="mailto:hacapoxd@gmail.com" class="floating-icon" title="Email">
+      <i class="fas fa-envelope"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/harricapiat/" target="_blank" class="floating-icon" title="LinkedIn">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+    <a href="https://github.com/Hacapoxd" target="_blank" class="floating-icon" title="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </div>
+
+  <div class="main-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="profile-avatar">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <h1 class="display-4 fw-bold mb-3">Harrison Capia Tintaya</h1>
+        <p class="lead mb-3">🎓 Estudiante de Estadística e Informática</p>
+        <p class="mb-4">📍 Universidad Nacional del Altiplano - Puno, Perú</p>
+        <div class="tech-badge">Data Analytics</div>
+        <div class="tech-badge">Statistical Modeling</div>
+        <div class="tech-badge">Web Development</div>
+        <div class="tech-badge">AI & ML</div>
+      </div>
+    </section>
+
+    <div class="px-4 pb-4">
+      <!-- Skills Section -->
+      <section class="section-card animate-on-scroll">
+        <h2 class="section-title">
+          <i class="fas fa-code"></i>
+          Habilidades y Tecnologías
+        </h2>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="skill-item">
+              <i class="fab fa-r-project text-primary me-2"></i>
+              <strong>R:</strong> ggplot2, dplyr, caret, shiny
+            </div>
+            <div class="skill-item">
+              <i class="fab fa-python text-warning me-2"></i>
+              <strong>Python:</strong> pandas, matplotlib, scikit-learn, seaborn
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-chart-line text-success me-2"></i>
+              <strong>Estadística:</strong> Modelos, regresión, hipótesis, bootstrap
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-database text-info me-2"></i>
+              <strong>SQL:</strong> MySQL, SQLite
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="skill-item">
+              <i class="fab fa-java text-danger me-2"></i>
+              <strong>Java:</strong> Javalin framework
+            </div>
+            <div class="skill-item">
+              <i class="fab fa-php text-primary me-2"></i>
+              <strong>PHP:</strong> Desarrollo web backend
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-chart-bar text-purple me-2"></i>
+              <strong>Visualización:</strong> Dashboards y reportes
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-brain text-secondary me-2"></i>
+              <strong>IA & ML:</strong> Algoritmos y automatización
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Systems Section -->
+      <section class="section-card animate-on-scroll">
+        <h2 class="section-title">
+          <i class="fas fa-rocket"></i>
+          Sistemas Desarrollados
+        </h2>
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="card system-card h-100">
+              <div class="system-card-header php-theme">
+                <h5 class="card-title mb-2">
+                  <i class="fas fa-graduation-cap me-2"></i>
+                  SYSPRE
+                </h5>
+                <small>Sistema de Control de Prácticas Preprofesionales</small>
+                <div class="mt-2">
+                  <span class="tech-badge">PHP</span>
+                  <span class="tech-badge">MySQL</span>
+                  <span class="tech-badge">Bootstrap</span>
+                </div>
+              </div>
+              <div class="system-card-body">
+                <p class="card-text mb-3">
+                  Plataforma integral para la gestión académica de prácticas preprofesionales 
+                  de la Universidad Nacional del Altiplano.
+                </p>
+                <h6 class="fw-bold mb-2">🎯 Características principales:</h6>
+                <ul class="feature-list mb-4">
+                  <li>Panel multirol (estudiante, docente, coordinador, admin)</li>
+                  <li>Gestión de planes de práctica</li>
+                  <li>Sistema de reportes semanales</li>
+                  <li>Seguimiento académico en tiempo real</li>
+                  <li>Evaluación y supervisión docente</li>
+                </ul>
+                <a href="https://syspre.alwaysdata.net/syspreu/" target="_blank" 
+                   class="btn btn-modern w-100" 
+                   style="background: var(--secondary-gradient); color: white;">
+                  <i class="fas fa-external-link-alt me-2"></i>
+                  Acceder al Sistema
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card system-card h-100">
+              <div class="system-card-header java-theme">
+                <h5 class="card-title mb-2">
+                  <i class="fab fa-java me-2"></i>
+                  Sistema Java Web
+                </h5>
+                <small>Aplicación Backend con Javalin Framework</small>
+                <div class="mt-2">
+                  <span class="tech-badge">Java</span>
+                  <span class="tech-badge">Javalin</span>
+                  <span class="tech-badge">API REST</span>
+                </div>
+              </div>
+              <div class="system-card-body">
+                <p class="card-text mb-3">
+                  Aplicación web moderna desarrollada con Java y el framework Javalin, 
+                  implementando arquitectura REST y patrones MVC.
+                </p>
+                <h6 class="fw-bold mb-2">🚀 Características técnicas:</h6>
+                <ul class="feature-list mb-4">
+                  <li>API RESTful completa</li>
+                  <li>Arquitectura MVC escalable</li>
+                  <li>Manejo de rutas dinámicas</li>
+                  <li>Integración con bases de datos</li>
+                  <li>Despliegue con túneles ngrok</li>
+                </ul>
+                <a href="https://59761ec1f072.ngrok-free.app/" target="_blank" 
+                   class="btn btn-modern w-100" 
+                   style="background: var(--success-gradient); color: white;">
+                  <i class="fas fa-external-link-alt me-2"></i>
+                  Ver Aplicación
+                </a>
+                <div class="mt-2">
+                  <small class="text-muted">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Servicio temporal con ngrok
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section class="section-card animate-on-scroll">
+        <h2 class="section-title">
+          <i class="fas fa-folder-open"></i>
+          Proyectos Académicos
+        </h2>
+        <div class="table-responsive">
+          <table class="table projects-table table-hover">
+            <thead>
+              <tr>
+                <th style="color: white;">
+                  <i class="fas fa-project-diagram me-2"></i>Proyecto
+                </th>
+                <th style="color: white;">
+                  <i class="fas fa-info-circle me-2"></i>Descripción
+                </th>
+                <th style="color: white;">
+                  <i class="fas fa-code me-2"></i>Tecnología
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a href="https://github.com/Hacapoxd/Finesi-lp3/tree/main/homeworks/Prueba%20t-student%20%2B%20ANOVA" 
+                     target="_blank" class="text-decoration-none fw-bold">
+                    <i class="fas fa-chart-line text-primary me-2"></i>
+                    Prueba t-student + ANOVA
+                  </a>
+                </td>
+                <td>Análisis estadístico comparativo entre grupos</td>
+                <td><span class="badge bg-primary">R</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="https://github.com/Hacapoxd/Finesi-lp3/tree/main/homeworks/Pruebas_Estadisticas_shiny" 
+                     target="_blank" class="text-decoration-none fw-bold">
+                    <i class="fas fa-desktop text-success me-2"></i>
+                    Pruebas Estadísticas Shiny
+                  </a>
+                </td>
+                <td>Aplicación web interactiva para pruebas estadísticas</td>
+                <td><span class="badge bg-success">R Shiny</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="https://github.com/Hacapoxd/Finesi-lp3/tree/main/homeworks/agente_gatos" 
+                     target="_blank" class="text-decoration-none fw-bold">
+                    <i class="fas fa-robot text-warning me-2"></i>
+                    Agente Gatos
+                  </a>
+                </td>
+                <td>Simulación de agente inteligente en entorno felino</td>
+                <td><span class="badge bg-warning">Python</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="https://github.com/Hacapoxd/Finesi-lp3/tree/main/homeworks/ia_aplicacion" 
+                     target="_blank" class="text-decoration-none fw-bold">
+                    <i class="fas fa-brain text-info me-2"></i>
+                    IA Aplicación
+                  </a>
+                </td>
+                <td>Proyecto con elementos de inteligencia artificial</td>
+                <td><span class="badge bg-info">Python</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="https://github.com/Hacapoxd/Finesi-lp3/tree/main/homeworks/random_pack" 
+                     target="_blank" class="text-decoration-none fw-bold">
+                    <i class="fas fa-dice text-secondary me-2"></i>
+                    Random Pack
+                  </a>
+                </td>
+                <td>Paquete para generación y análisis de datos aleatorios</td>
+                <td><span class="badge bg-secondary">R</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="section-card animate-on-scroll">
+        <h2 class="section-title">
+          <i class="fas fa-envelope"></i>
+          Información de Contacto
+        </h2>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="contact-item">
+              <i class="fas fa-envelope text-primary me-3 fs-4"></i>
+              <div>
+                <strong>Email</strong><br>
+                <a href="mailto:hacapoxd@gmail.com" class="text-decoration-none">
+                  hacapoxd@gmail.com
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="contact-item">
+              <i class="fab fa-linkedin text-primary me-3 fs-4"></i>
+              <div>
+                <strong>LinkedIn</strong><br>
+                <a href="https://www.linkedin.com/in/harricapiat/" target="_blank" class="text-decoration-none">
+                  linkedin.com/in/harricapiat
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <hr>
-
-    <section>
-      <h2 class="h4">🧰 Habilidades y Tecnologías</h2>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">📊 <strong>R:</strong> ggplot2, dplyr, caret, shiny</li>
-        <li class="list-group-item">🐍 <strong>Python:</strong> pandas, matplotlib, scikit-learn, seaborn</li>
-        <li class="list-group-item">🧮 Modelos estadísticos, regresión, pruebas de hipótesis, bootstrap</li>
-        <li class="list-group-item">📂 <strong>SQL:</strong> MySQL, SQLite</li>
-        <li class="list-group-item">📊 Visualización de datos y dashboards</li>
-        <li class="list-group-item">🔄 Automatización de tareas y reportes</li>
-        <li class="list-group-item">🧠 Introducción a la inteligencia artificial y aprendizaje automático</li>
-      </ul>
-    </section>
-
-    <hr>
-
-    <section>
-      <h2 class="h4">📂 Proyectos Académicos</h2>
-      <table class="table table-striped table-bordered">
-        <thead class="table-dark">
-          <tr>
-            <th>Proyecto</th>
-            <th>Descripción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><a href="https://github.com/Hacapoxd/Finesi-lp3/tree/main/homeworks/Prueba%20t-student%20%2B%20ANOVA" target="_blank">Prueba t-student + ANOVA</a></td>
-            <td>Análisis estadístico comparativo entre grupos usando R</td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/Hacapoxd/Finesi-lp3/tree/main/homeworks/Pruebas_Estadisticas_shiny" target="_blank">Pruebas_Estadisticas_shiny</a></td>
-            <td>Aplicación web en R Shiny para realizar pruebas estadísticas fácilmente</td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/Hacapoxd/Finesi-lp3/tree/main/homeworks/agente_gatos" target="_blank">agente_gatos</a></td>
-            <td>Simulación de un agente inteligente para moverse en un entorno de gatos</td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/Hacapoxd/Finesi-lp3/tree/main/homeworks/ia_aplicacion" target="_blank">ia_aplicacion</a></td>
-            <td>Proyecto de aplicación con elementos de inteligencia artificial en Python</td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/Hacapoxd/Finesi-lp3/tree/main/homeworks/prueba%20T-student" target="_blank">prueba T-student</a></td>
-            <td>Evaluación de diferencias de medias con distribución T</td>
-          </tr>
-          <tr>
-            <td><a href="https://github.com/Hacapoxd/Finesi-lp3/tree/main/homeworks/random_pack" target="_blank">random_pack</a></td>
-            <td>Paquete con funciones para generación y análisis de datos aleatorios</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <hr>
-
-    <section>
-      <h2 class="h4">📫 Contacto</h2>
-      <ul class="list-unstyled">
-        <li>📧 <strong>Email:</strong> <a href="mailto:hacapoxd@gmail.com">hacapoxd@gmail.com</a></li>
-        <li>💼 <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/harricapiat/" target="_blank">linkedin.com/in/harricapiat</a></li>
-      </ul>
-    </section>
-
-    <footer class="mt-5 text-center text-muted">
-      <small>“El poder está en los datos, pero el conocimiento nace del análisis.”</small>
+    <!-- Footer -->
+    <footer class="footer-quote">
+      <i class="fas fa-quote-left me-2"></i>
+      El poder está en los datos, pero el conocimiento nace del análisis.
+      <i class="fas fa-quote-right ms-2"></i>
     </footer>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.8s ease';
+      observer.observe(el);
+    });
+
+    // Smooth hover effects for cards
+    document.querySelectorAll('.system-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Interactive button effects
+    document.querySelectorAll('.btn-modern').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        let ripple = document.createElement('span');
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.background = 'rgba(255,255,255,0.6)';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.animation = 'ripple 0.6s linear';
+        ripple.style.left = (e.clientX - e.target.offsetLeft) + 'px';
+        ripple.style.top = (e.clientY - e.target.offsetTop) + 'px';
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+  </script>
+
+  <style>
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  </style>
 
 </body>
 </html>
